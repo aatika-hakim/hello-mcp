@@ -45,5 +45,18 @@ async def main():
     
     print("\nRESULT OF TOOLS: ", tools_response)
 
+    print("\n[Step 2: Call the 'greet' tool]")
+    print("We send a 'tools/call' request with name='greet' and an argument.")
+    call_response = await _mcp_request(
+        "tools/call",
+        {
+            "name": "greet",
+            "arguments": {
+                "name": "MCP"
+            }
+        }
+    )
+    print("\nRESULT OF CALL: ", call_response)
+
 if __name__ == "__main__":
     asyncio.run(main())
