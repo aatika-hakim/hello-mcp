@@ -10,7 +10,7 @@ body = {
     "jsonrpc": "2.0",
     "id": 1,
     "method": "tools/list",
-    "params": {"a": 5, "b": 3}
+    "params": {},
 }
 
 response = requests.post(url, headers=headers, json=body)
