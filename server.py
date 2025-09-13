@@ -1,19 +1,21 @@
-from mcp.server.fastmcp import FastMCP  # pyright: ignore[reportMissingImports]
-from mcp.types import TextContent  # pyright: ignore[reportMissingImports]
+from mcp.server.fastmcp import FastMCP
 
-# Initialize FastMCP server with enhanced metadata for 2025-06-18 spec
-mcp = FastMCP(
-    name="hello-server",
-    stateless_http=True
-)
+# Create MCP sever
+mcp = FastMCP(name ="Calculator" ,stateless_http=True)
 
-
-@mcp.tool()
-async def greet(name: str) -> list[TextContent]:
-    """Return a friendly greeting for the provided name."""
-    return [TextContent(type="text", text=f"Hello, {name}!")]
-
-
-# Expose ASGI app for uvicorn
 mcp_app = mcp.streamable_http_app()
-app = mcp_app
+
+# # tool
+# @mcp.tool()
+# def add(a: int, b: int) -> int:
+#     """Return the sum of two integers."""
+#     return a + b
+
+# # dynamic greeting resource
+# @mcp.resource("greeting://{name}")
+# def greet(name: str) -> str:
+#     """Return a friendly greeting for the provided name."""
+#     return f"Hello, {name}!"
+
+
+
