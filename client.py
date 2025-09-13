@@ -13,7 +13,7 @@ body = {
     "params": {"a": 5, "b": 3}
 }
 
-response = requests.post(url, json=body, headers=headers)
+response = requests.post(url, headers=headers, json=body)
 
 for line in response.iter_lines():
     if line:
