@@ -1,6 +1,6 @@
-# hello-mcp
+# hello-mcp (Weather Agent)
 
-Minimal Model Context Protocol (MCP) project with a FastMCP server and a simple async client.
+Minimal Model Context Protocol (MCP) project with a FastMCP server exposing a `weather` tool that fetches current conditions from Open-Meteo, plus a simple HTTP client.
 
 ## Prerequisites
 
@@ -37,13 +37,12 @@ In a separate terminal (with the same venv activated):
 python client.py
 ```
 
-You should see the list of tools and a call to the `greet` tool returning a greeting.
+You should see the list of tools and the result from calling the `weather` tool for Karachi.
 
 ## Project layout
 
-- `server.py`: FastMCP server with a `greet` tool, exported as ASGI `app`.
-- `client.py`: Async httpx client demonstrating `tools/list` and `tools/call`.
-- `main.py`: Simple entry for packaging examples.
+- `server.py`: FastMCP server exposing a `weather` tool, exported as ASGI `app`.
+- `client.py`: Simple HTTP client demonstrating `tools/list` and `tools/call`.
 - `pyproject.toml`: Project metadata and dependencies.
 
 ## Notes
