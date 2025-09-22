@@ -1,3 +1,42 @@
+WeatherAgent MCP Server (production-ready basics)
+
+Quickstart
+
+```bash
+# Windows PowerShell
+python -m venv .venv
+. .venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+
+# Run (dev)
+$env:RELOAD="true"; $env:LOG_LEVEL="INFO"; python server.py
+
+# Or run via uvicorn directly
+uvicorn server:app --host 0.0.0.0 --port 8000 --log-level info
+```
+
+Environment variables
+
+- LOG_LEVEL: debug|info|warning|error (default: info)
+- REQUEST_TIMEOUT_SECONDS: outbound HTTP timeout (default: 10.0)
+- HTTP_MAX_RETRIES: retry attempts excluding the first try (default: 2)
+- HTTP_BACKOFF_SECONDS: base backoff seconds for exponential backoff (default: 0.5)
+- GEOCODE_CACHE_TTL_SECONDS: seconds to cache geocoding results (default: 3600)
+- FORECAST_CACHE_TTL_SECONDS: seconds to cache forecast results (default: 300)
+- SERVICE_VERSION: service version string (default: 1.0.0)
+- HOST/PORT: binding for the __main__ runner (defaults: 0.0.0.0:8000)
+
+Tools exposed
+
+- weather(query, units): returns current weather for a location
+- health(): readiness/liveness with version and timestamp
+
+Production notes
+
+- Process-local in-memory caches are provided; for multi-instance deployments use Redis or Memcached.
+- Retries with exponential backoff and request timeouts are configured.
+- Add HTTP proxy and TLS settings as needed via environment or httpx client options.
+- For containerization, expose port 8000 and run with: uvicorn server:app --workers 2 --host 0.0.0.0 --port 8000
 # hello-mcp (Weather Agent)
 
 Minimal Model Context Protocol (MCP) project with a FastMCP server exposing a `weather` tool that fetches current conditions from Open-Meteo, plus a simple HTTP client.
